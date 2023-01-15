@@ -1,0 +1,83 @@
+.app-upload {
+
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    background-color: #BDB5D5;
+    padding-bottom: 100px;
+
+}
+
+.input-container-upload {
+    display: flex;
+    flex-direction: column;
+    color: #301934;
+    font-size: 20px;
+    font-family: "American Typewriter";
+}
+
+.form-upload {
+    background-color: white;
+
+}
+
+input[name="name"],
+[name="details"],
+[name="price"],
+[name="final_date"],
+[name="initial_date"] {
+    border: 3px solid #ccc;
+    border-radius: 8px;
+    width: 300px;
+    box-sizing: border-box;
+    font-family: "American Typewriter";
+}
+
+.button_save {
+    border-color: #301934;
+    display: flex;
+    color: white;
+    font-size: 20px;
+    font-family: "American Typewriter";
+    text-align: center;
+    background-color: #301934;
+    margin-left: 70px;
+}
+
+.button_cancel {
+    border-color: #301934;
+    color: white;
+    font-size: 20px;
+    font-family: "American Typewriter";
+    text-align: center;
+    background-color: #301934;
+    margin-left: 280px;
+    margin-top: -70px;
+}
+
+.formGroup {
+    background-color: white;
+    padding-left: 10px;
+}
+
+.container-box {
+    align-content: center;
+    padding: 50px 300px 60px;
+}
+
+.formContainer {
+    background-color: white;
+    padding-right: 100px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+}
+
+.titleProductAdd{
+    font-size: 50px;
+    font-weight: bold;
+    padding-top: 0px;
+    color: #301934;
+    font-family: "American Typewriter";
+    position: absolute;
+    top: 60px;
+    left: 450px;
+    align-content: center;
+}
