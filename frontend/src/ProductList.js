@@ -1,12 +1,9 @@
-import React,{Component} from "react";
+import {Component} from "react";
 import {Button, ButtonGroup, Container, Table} from 'reactstrap';
 import AppNavbar from './AppNavbar';
 import {Link, withRouter} from 'react-router-dom';
-import "./cardstyle.css";
-import img from "./image/bg.jpg";
-
-
-
+import "./cardstyle.css"
+import img from "./image/image.jpg";
 
 class ProductList extends Component {
 
@@ -24,7 +21,7 @@ class ProductList extends Component {
 
 
     async remove(id) {
-        await fetch(`/products/${id}`, {
+         fetch(`/products/${id}`, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
@@ -33,6 +30,8 @@ class ProductList extends Component {
         }).then(() => {
             let updateProducts = [...this.state.products].filter(i => i.id !== id);
             this.setState({products: updateProducts});
+
+
         });
     }
 
@@ -46,10 +45,11 @@ class ProductList extends Component {
             return <div class="items" key={product.id}>
 
 
+                <img src={img}  alt="logo" />
+
 
                 <div className="name">
-                    {product.name} </div>
-                <img src={img}  alt="logo"  />
+                     {product.name} </div>
 
                 <div className="info">{product.details}</div>
                 <div className="price">PRICE: {product.price}</div>
@@ -62,9 +62,11 @@ class ProductList extends Component {
         });
         return (
             <div>
+
                 <div className="section2">
                     <div className="container">
                         {productList}
+
                     </div>
                 </div>
             </div>

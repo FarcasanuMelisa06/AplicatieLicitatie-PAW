@@ -8,24 +8,30 @@ import java.io.Serializable;
 public class Product implements Serializable {
     private long id;
     private String name;
-    private String price;
+    private  String price;
     private String details;
-
-    private String initial_date;
-
-    private String final_date;
+    @Lob
+    private byte[] image;
 
 
-    public Product(long id, String name, String details, String price, String final_date, String initial_date) {
-        this.id = id;
+    public Product(byte[] image) {
+        this.image = image;
+    }
+
+    public Product(long id, String name, String details, String price) {
+        this.id=id;
         this.price = price;
         this.details = details;
         this.name = name;
-        this.final_date = final_date;
-        this.initial_date = initial_date;
-
     }
 
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
 
     public Product() {
 
@@ -47,7 +53,7 @@ public class Product implements Serializable {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name= name;
     }
 
     public String getPrice() {
@@ -65,21 +71,4 @@ public class Product implements Serializable {
     public void setDetails(String details) {
         this.details = details;
     }
-
-    public String getInitial_date() {
-        return initial_date;
-    }
-
-    public void setInitial_date(String initial_date) {this.initial_date = initial_date;}
-
-
-    public String getFinal_date() {
-        return final_date;
-    }
-
-    public void setFinal_date(String final_date) {
-        this.final_date = final_date;
-    }
-
-
 }

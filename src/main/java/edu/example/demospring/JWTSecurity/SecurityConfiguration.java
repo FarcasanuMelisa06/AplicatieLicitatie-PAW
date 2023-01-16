@@ -1,5 +1,6 @@
 package edu.example.demospring.JWTSecurity;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and();
         http=http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and();
         http.authorizeRequests().antMatchers("/**").permitAll();
-        /*.antMatchers("/products/new").authenticated();*/
+        
 
 
 

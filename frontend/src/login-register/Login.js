@@ -1,9 +1,9 @@
-import React, {Component} from "react";
+import React,{Component} from "react";
 import './login.css';
 import {Container, Form, FormGroup, Label} from "reactstrap";
 
 
-class Login extends Component {
+class Login extends Component{
 
 
     emptyItem = {
@@ -40,13 +40,13 @@ class Login extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(item),
-        }).then((response) => response.text()).then((result) => {
-            if (result != "this user doesnt exist") {
-                // result = "Bearer " + result;
+        }).then((response)=>response.text()).then((result)=>{
+            if(result!="this user doesnt exist" ){
+
                 localStorage.setItem('jwt', result);
-                window.location.href = "/logged-home";
-            } else {
-                alert("Wrong credentials!")
+                window.location.href="/logged-home";
+            }else{
+                alert("Wrong data! Check again")
             }
         });
     }
@@ -56,10 +56,12 @@ class Login extends Component {
         const {item} = this.state;
         return (
 
+
             <div className="app">
                 <h1>Login in your account</h1>
                 <Container>
-                    <Form className="formLogReg" onSubmit={this.handleSubmit}>
+
+                    <Form className ="formLogReg"onSubmit={this.handleSubmit}>
                         <FormGroup>
                             <div className="input-container">
                                 <Label for="name">Username</Label>
@@ -70,30 +72,30 @@ class Login extends Component {
                                        onChange={this.handleChange}
                                        autoComplete="username"/>
 
-                            </div>
-                            <div className="input-container">
 
-                                <Label for="name">Password</Label>
-                                <input type="password"
-                                       name="password"
-                                       id="password"
-                                       value={item.password}
-                                       onChange={this.handleChange}
-                                       autoComplete="password"/>
-                            </div>
-                            <div className="button-container">
-                                <a href="/">
-                                    <input type="button" className="btn_sign" value="Sign in"/>
-                                </a>
+                                <div className="input-container">
+                                    <Label for="name">Password</Label>
+                                    <input type="password"
+                                           name="password"
+                                           id="password"
+                                           value={item.password}
+                                           onChange={this.handleChange}
+                                           autoComplete="password"/>
+                                </div>
+
+                                {/*<div className="button-container">*/}
+                                <button className="btn_sign">Sign in</button>
                                 <a href="/register">
                                     <input type="button" className="btn_register" value="Register"/>
                                 </a>
+                                {/*</div>*/}
+
                             </div>
+
                         </FormGroup>
                     </Form>
                 </Container>
             </div>
-
 
         );
     }

@@ -12,7 +12,7 @@ import java.io.Serializable;
 
 
 @Component
-public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint,Serializable{
+public  class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint,Serializable{
 
     private static final long serialVersionUID = -7858869558953243875L;
 
@@ -21,6 +21,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint,Ser
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException authException) throws IOException {
 
+        //returneaza mesajul "unathorised" daca ceva nu a functionat
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
     }
 }

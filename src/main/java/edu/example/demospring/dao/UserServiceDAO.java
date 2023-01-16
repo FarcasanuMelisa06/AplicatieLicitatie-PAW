@@ -1,5 +1,6 @@
 package edu.example.demospring.dao;
 
+
 import edu.example.demospring.persitence.User;
 import org.springframework.stereotype.Repository;
 

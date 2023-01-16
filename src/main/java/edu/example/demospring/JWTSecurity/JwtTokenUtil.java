@@ -1,5 +1,6 @@
 package edu.example.demospring.JWTSecurity;
 
+
 import io.jsonwebtoken.*;
 import org.springframework.stereotype.Component;
 
@@ -13,17 +14,18 @@ import java.util.function.Function;
 public class JwtTokenUtil implements Serializable {
     private static final long serialVersionUID = -2550185165626007488L;
 
+    //timpul de validare
     public static final long JWT_TOKEN_VALIDITY = 1500000;
 
-    // static Key secret = MacProvider.generateKey();
+
     static String secret="KaPdSgVkYp3s6v9yKaPdSgVkYp3s6v9yKaPdSgVkYp3s6v9y";
 
-    //retrieve username from jwt token
+    //returneaza username-ul de la  jwt token
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
     }
 
-    //retrieve expiration date from jwt token
+    //returneaza data de expirare
     public Date getExpirationDateFromToken(String token) {
         return getClaimFromToken(token, Claims::getExpiration);
     }
@@ -33,28 +35,22 @@ public class JwtTokenUtil implements Serializable {
 
         return claimsResolver.apply(claims);
     }
-    //for retrieveing any information from token we will need the secret key
     private Claims getAllClaimsFromToken(String token) {
         return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
     }
 
-    //check if the token has expired
+    //verificamd aca token ul a expirat
     private Boolean isTokenExpired(String token) {
         final Date expiration = getExpirationDateFromToken(token);
         return expiration.before(new Date());
     }
 
-    //generate token for user
+    //generam un token pentru utilizator
     public String generateToken(MyUserDetails myUserDetails) {
         Map<String, Object> claims = new HashMap<>();
         return doGenerateToken(claims, myUserDetails.getUsername());
     }
 
-    //while creating the token -
-    //1. Define  claims of the token, like Issuer, Expiration, Subject, and the ID
-    //2. Sign the JWT using the HS512 algorithm and secret key.
-    //3. According to JWS Compact Serialization(https://tools.ietf.org/html/draft-ietf-jose-json-web-signature-41#section-3.1)
-    //   compaction of the JWT to a URL-safe string
     private String doGenerateToken(Map<String, Object> claims, String subject) {
 
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
@@ -63,7 +59,7 @@ public class JwtTokenUtil implements Serializable {
 
     }
 
-    //validate token
+    //validare token
     public boolean validateJwtToken(String authToken) {
         try {
             Jwts.parser().setSigningKey(secret).parseClaimsJws(authToken);

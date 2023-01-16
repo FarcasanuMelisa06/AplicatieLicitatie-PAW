@@ -11,6 +11,7 @@ import edu.example.demospring.repository.ProductRepository;
 import edu.example.demospring.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +23,8 @@ import java.util.stream.Collectors;
 
 @RestController
 public class UserServiceController {
+    PasswordEncoder passwordEncoder;
+
     private static Map<Long, UserDTO> userDTOMap=new HashMap<>();
     final UserRepository userRepository;
     final UserServiceDAO userServiceDAO;
@@ -54,14 +57,14 @@ public class UserServiceController {
     @RequestMapping(value="/login",method = RequestMethod.POST)
     public String loginUser(@RequestBody LoginDTO loginDTO)
     {
-        if(userRepository.findByUsername(loginDTO.username)==null)
-        {
-            return "this user doesnt exist";
-        }
+       if(userRepository.findByUsername(loginDTO.username)==null)
+       {
+           return "this user doesnt exist";
+       }
 
 
         token = new JwtTokenUtil();
-        System.out.println("token here:"+ token);
+       System.out.println("token here:"+ token);
         MyUserDetails userDetails= new MyUserDetails(userRepository.findByUsername(loginDTO.username));
         return token.generateToken(userDetails);
 

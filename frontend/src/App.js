@@ -1,16 +1,17 @@
 
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import './App.css';
-import React,{Component} from "react";
+import {Component} from "react";
 import Home from './Home'
 import ProductList from "./ProductList";
-import ProductAdd from "./Product-Add-Edit/ProductAdd";
-import ProductEdit from "./Product-Add-Edit/ProductEdit";
-import Login from "./loginRegister/Login";
-import Register from "./loginRegister/Register";
+import ProductEdit from "./product-add-edit/ProductEdit";
 import Productpage from "./productpage";
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-
+import Login from "./login-register/Login";
+import Register from "./login-register/Register";
+import LoggedHome from "./LoggedHome";
+import SocketMessage from "./SocketMessage";
+import App_Stomp from "./App_Stomp";
+import ProductAdd from "./product-add-edit/ProductAdd";
 
 
 class App extends Component {
@@ -22,8 +23,10 @@ class App extends Component {
         const response = await fetch('/products');
         const body = await response.json();
         this.setState({products: body});
+        const response2=await fetch('/users');
+        const body2=await response.json();
+        this.setState({users:body});
     }
-
 
     render() {
         return (
@@ -31,11 +34,15 @@ class App extends Component {
                 <Switch>
                     <Route path='/' exact={true}><Home/></Route>
                     <Route path='/products' exact={true}><ProductList/></Route>
+                    <Route path='/products_page/:id'><Productpage/></Route>
                     <Route path='/products/:id'><ProductAdd/></Route>
                     <Route path='/login'><Login/></Route>
                     <Route path = '/register'><Register/></Route>
                     <Route path = '/productEdit'><ProductEdit/></Route>
-                    <Route path='/products_page/:id'><Productpage/></Route>
+                    <Route path='/logged-home'><LoggedHome/></Route>
+                    <Route path='/app'><App_Stomp/></Route>
+                    <Route path='/message'><SocketMessage/></Route>
+
 
                 </Switch>
             </Router>

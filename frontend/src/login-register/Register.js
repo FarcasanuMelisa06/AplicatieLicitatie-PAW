@@ -1,4 +1,5 @@
 import React,{Component} from "react";
+import './login.css';
 import {Link, withRouter} from 'react-router-dom';
 import {Button, Container, Form, FormGroup, Input, Label} from 'reactstrap';
 
@@ -24,6 +25,7 @@ class Register extends Component{
 
         const product = await (await fetch(`/products/${this.props.match.params.id}`)).json();
         this.setState({item: product});
+
     }
 
     handleChange(event) {
@@ -64,17 +66,15 @@ class Register extends Component{
     render() {
         const {item} = this.state;
         return (
-
             <div className="app">
 
                 <Container>
 
-                    <Form className="formLogReg" onSubmit={this.handleSubmit}>
+                    <Form className ="formLogReg" onSubmit={this.handleSubmit}>
                         <FormGroup>
                             <div className="login-box">
                                 <h1 className="account">Create an account</h1>
                                 <div className="input-container">
-                                    <Label for="name">Username</Label>
                                     <input type="text"
                                            name="username"
                                            id="username"
@@ -82,7 +82,6 @@ class Register extends Component{
                                            value={item.username}
                                            onChange={this.handleChange}
                                            autoComplete="username"/>
-
                                 </div>
 
                                 <div className="input-container">
@@ -110,7 +109,7 @@ class Register extends Component{
                                 </div>
 
                                 <FormGroup>
-                                    <Button  className="button-create" type="submit">Create account</Button>
+                                    <Button className = "button-create" type="submit">Create account</Button>
 
                                 </FormGroup>
 

@@ -1,4 +1,4 @@
-import React,{Component} from "react";
+import {Component} from "react";
 import {Link, withRouter} from 'react-router-dom';
 import {Button, Container, Form, FormGroup, Input, Label} from 'reactstrap';
 import AppNavbar from '../AppNavbar';
@@ -6,13 +6,13 @@ import "./ProductAdd.css";
 
 
 class ProductAdd extends Component {
-
     emptyItem = {
         name: '',
         price:'',
-        details:'',
+        description:'',
         final_date:'',
-        initial_date:''
+        initial_date:'',
+        image:''
     };
 
     constructor(props) {
@@ -36,7 +36,7 @@ class ProductAdd extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        const details = target.details;
+        const description = target.description;
         const price = target.price;
         const final_date = target.final_date;
         const initial_date = target.initial_date;
@@ -56,8 +56,13 @@ class ProductAdd extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(item),
+        }).then((response)=>response.text()).then((result)=>{
+            if(result=="Product created"){
+                alert("Product added successfully!");
+            }else{
+                alert("Something went wrong!");
+            }
         });
-        this.props.history.push('/products');
     }
 
 
@@ -65,15 +70,15 @@ class ProductAdd extends Component {
         const {item} = this.state;
 
 
-        const title = <h2 className="titleProductAdd">{item.id ? 'Edit Product' : 'Add your Product'}</h2>;
+        const title = <h2>{item.id ? 'Edit Product' : 'Add your Product'}</h2>;
 
         return (<div className="app-upload">
             <AppNavbar/>
-            <Container className="container-box">
+            <Container className = "container-box">
                 {title}
-                <Form className="formContainer" onSubmit={this.handleSubmit}>
-                    <FormGroup className="formGroup">
-                        <Label  className="input-container-upload" for="name">Name</Label>
+                <Form  className = "formContainer" onSubmit={this.handleSubmit}>
+                    <FormGroup className = "formGroup">
+                        <Label className = "input-container-upload" for="name">Name</Label>
                         <Input type="text"
                                name="name"
                                id="name"
@@ -81,7 +86,7 @@ class ProductAdd extends Component {
                                onChange={this.handleChange}
                                autoComplete="name"/>
 
-                        <Label className="input-container-upload"  for="name">Description</Label>
+                        <Label className = "input-container-upload" for="name">Description</Label>
                         <Input type="text"
                                name="details"
                                id="details"
@@ -89,7 +94,7 @@ class ProductAdd extends Component {
                                onChange={this.handleChange}
                                autoComplete="details"/>
 
-                        <Label className="input-container-upload"  for="name">Price</Label>
+                        <Label className="input-container-upload" for="name">Price</Label>
                         <Input type="text"
                                name="price"
                                id="price"
@@ -97,7 +102,6 @@ class ProductAdd extends Component {
                                onChange={this.handleChange}
                                autoComplete="details"/>
                         <Label className="input-container-upload" for="name">Date initial</Label>
-
                         <Input type="text"
                                name="initial_date"
                                id="initial_date"
@@ -113,11 +117,10 @@ class ProductAdd extends Component {
                                onChange={this.handleChange}
                                autoComplete="final_dates"/>
 
-
                     </FormGroup>
                     <FormGroup>
-                        <Button className="button_save" type="submit">Save</Button>
-                        <Button className="button_cancel" tag={Link} to="/">Cancel</Button>
+                        <Button className = "button_save" type="submit">Save</Button>
+                        <Button className="button_cancel" tag={Link} to="/logged-home">Cancel</Button>
                     </FormGroup>
                 </Form>
             </Container>

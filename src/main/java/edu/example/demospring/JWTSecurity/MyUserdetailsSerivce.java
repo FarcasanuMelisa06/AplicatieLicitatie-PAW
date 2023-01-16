@@ -16,13 +16,15 @@ public class MyUserdetailsSerivce implements UserDetailsService{
 
     @Autowired
 
+
     UserRepository repository;
     @Override
+    //preia username ul trimis si il cauta in baza de date
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user=repository.findByUsername(username);
         if(user==null)
             throw new UsernameNotFoundException("user not found");
         var userDetails=new MyUserDetails(user);
-        return userDetails;
+            return userDetails;
     }
 }
